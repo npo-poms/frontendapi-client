@@ -3060,7 +3060,8 @@
             "description": "The language for which to get the subtitles",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/string"
+              "type": "string",
+              "default": "nl"
             }
           }
         ],
@@ -3112,7 +3113,8 @@
             "description": "The language for which to get the subtitles",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/string"
+              "type": "string",
+              "default": "nl"
             },
             "example": "nl_NL"
           },
@@ -3557,68 +3559,9 @@
         "type": "object",
         "properties": {
           "language": {
-            "type": "object",
-            "properties": {
-              "language": {
-                "type": "string"
-              },
-              "script": {
-                "type": "string"
-              },
-              "variant": {
-                "type": "string"
-              },
-              "displayName": {
-                "type": "string"
-              },
-              "country": {
-                "type": "string"
-              },
-              "unicodeLocaleAttributes": {
-                "uniqueItems": true,
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "xml": {
-                    "name": "scopeNote"
-                  }
-                }
-              },
-              "unicodeLocaleKeys": {
-                "uniqueItems": true,
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "xml": {
-                    "name": "scopeNote"
-                  }
-                }
-              },
-              "displayLanguage": {
-                "type": "string"
-              },
-              "displayScript": {
-                "type": "string"
-              },
-              "displayCountry": {
-                "type": "string"
-              },
-              "displayVariant": {
-                "type": "string"
-              },
-              "extensionKeys": {
-                "uniqueItems": true,
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "iso3Language": {
-                "type": "string"
-              },
-              "iso3Country": {
-                "type": "string"
-              }
+            "type": "string",
+            "xml": {
+              "attribute": true
             }
           },
           "type": {
@@ -4388,15 +4331,15 @@
           "alternativeOrTitle": {
             "type": "string"
           },
-          "publishDate": {
+          "urn": {
             "type": "string",
-            "format": "date-time",
             "xml": {
               "attribute": true
             }
           },
-          "urn": {
+          "publishDate": {
             "type": "string",
+            "format": "date-time",
             "xml": {
               "attribute": true
             }
@@ -4662,15 +4605,15 @@
               "attribute": true
             }
           },
-          "publishDate": {
+          "urn": {
             "type": "string",
-            "format": "date-time",
             "xml": {
               "attribute": true
             }
           },
-          "urn": {
+          "publishDate": {
             "type": "string",
+            "format": "date-time",
             "xml": {
               "attribute": true
             }
@@ -5358,11 +5301,11 @@
           "id": {
             "type": "string"
           },
-          "iconClass": {
-            "type": "string"
-          },
           "pluralDisplayName": {
             "$ref": "#/components/schemas/LocalizedString"
+          },
+          "iconClass": {
+            "type": "string"
           },
           "icon": {
             "type": "string"
@@ -10236,6 +10179,13 @@
               "attribute": true
             }
           },
+          "publishStop": {
+            "type": "string",
+            "format": "date-time",
+            "xml": {
+              "attribute": true
+            }
+          },
           "workflow": {
             "type": "string",
             "xml": {
@@ -10252,13 +10202,6 @@
               "PUBLISHED",
               "DELETED"
             ]
-          },
-          "publishStop": {
-            "type": "string",
-            "format": "date-time",
-            "xml": {
-              "attribute": true
-            }
           },
           "objectType": {
             "type": "string"
@@ -10412,61 +10355,35 @@
       },
       "genre": {
         "type": "object",
-        "xml": {
-          "name": "genre",
-          "namespace": "urn:vpro:gtaa:2017"
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/GTAAConcept"
+        "properties": {
+          "id": {
+            "pattern": "3\\.(?:[0-9]+\\.){2,}[0-9]+",
+            "type": "string",
+            "xml": {
+              "attribute": true
+            }
           },
-          {
-            "type": "object",
-            "properties": {
-              "scopeNotes": {
-                "type": "array",
-                "xml": {
-                  "name": "scopeNote"
-                },
-                "items": {
-                  "type": "string",
-                  "xml": {
-                    "name": "scopeNote"
-                  }
-                }
-              },
-              "id": {
-                "type": "string",
-                "format": "uri",
-                "xml": {
-                  "attribute": true
-                }
-              },
-              "status": {
-                "type": "string",
-                "xml": {
-                  "attribute": true
-                },
-                "enum": [
-                  "candidate",
-                  "approved",
-                  "redirected",
-                  "not_compliant",
-                  "rejected",
-                  "obsolete",
-                  "deleted"
-                ]
-              },
-              "lastModified": {
-                "type": "string",
-                "format": "date-time",
-                "xml": {
-                  "attribute": true
-                }
-              }
+          "terms": {
+            "type": "array",
+            "xml": {
+              "name": "term",
+              "namespace": "urn:vpro:pages:2013"
+            },
+            "items": {
+              "$ref": "#/components/schemas/TermWrapper"
+            }
+          },
+          "displayName": {
+            "type": "string",
+            "xml": {
+              "attribute": true
             }
           }
-        ]
+        },
+        "xml": {
+          "name": "genre",
+          "namespace": "urn:vpro:pages:2013"
+        }
       },
       "pageSearchResult": {
         "type": "object",
@@ -11831,10 +11748,9 @@
               "attribute": true
             }
           },
-          "string": {
+          "lang": {
             "type": "string",
             "xml": {
-              "name": "lang",
               "namespace": "http://www.w3.org/XML/1998/namespace",
               "attribute": true
             }
@@ -11850,65 +11766,6 @@
         "xml": {
           "name": "subtitles",
           "namespace": "urn:vpro:media:subtitles:2009"
-        }
-      },
-      "string": {
-        "type": "object",
-        "properties": {
-          "language": {
-            "type": "string"
-          },
-          "script": {
-            "type": "string"
-          },
-          "variant": {
-            "type": "string"
-          },
-          "displayName": {
-            "type": "string"
-          },
-          "country": {
-            "type": "string"
-          },
-          "unicodeLocaleAttributes": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "unicodeLocaleKeys": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "displayLanguage": {
-            "type": "string"
-          },
-          "displayScript": {
-            "type": "string"
-          },
-          "displayCountry": {
-            "type": "string"
-          },
-          "displayVariant": {
-            "type": "string"
-          },
-          "extensionKeys": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "iso3Language": {
-            "type": "string"
-          },
-          "iso3Country": {
-            "type": "string"
-          }
         }
       },
       "CueSettings": {
@@ -12114,62 +11971,10 @@
             "type": "string"
           },
           "lang": {
-            "type": "object",
-            "properties": {
-              "language": {
-                "type": "string"
-              },
-              "script": {
-                "type": "string"
-              },
-              "variant": {
-                "type": "string"
-              },
-              "displayName": {
-                "type": "string"
-              },
-              "country": {
-                "type": "string"
-              },
-              "unicodeLocaleAttributes": {
-                "uniqueItems": true,
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "unicodeLocaleKeys": {
-                "uniqueItems": true,
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "displayLanguage": {
-                "type": "string"
-              },
-              "displayScript": {
-                "type": "string"
-              },
-              "displayCountry": {
-                "type": "string"
-              },
-              "displayVariant": {
-                "type": "string"
-              },
-              "extensionKeys": {
-                "uniqueItems": true,
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "iso3Language": {
-                "type": "string"
-              },
-              "iso3Country": {
-                "type": "string"
-              }
+            "type": "string",
+            "xml": {
+              "namespace": "http://www.w3.org/XML/1998/namespace",
+              "attribute": true
             }
           }
         },
@@ -12269,65 +12074,7 @@
           "namespace": "urn:vpro:api:2013"
         }
       },
-      "GTAAConcept": {
-        "required": [
-          "objectType"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string",
-            "format": "uri"
-          },
-          "lastModified": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "scopeNotes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "redirectedFrom": {
-            "type": "string",
-            "format": "uri"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "candidate",
-              "approved",
-              "redirected",
-              "not_compliant",
-              "rejected",
-              "obsolete",
-              "deleted"
-            ]
-          },
-          "objectType": {
-            "type": "string"
-          }
-        },
-        "discriminator": {
-          "propertyName": "objectType"
-        }
-      },
-      "Names": {
-        "type": "object",
-        "properties": {
-          "givenName": {
-            "type": "string"
-          },
-          "familyName": {
-            "type": "string"
-          }
-        }
-      },
-      "classification": {
+      "GTAAClassification": {
         "type": "object",
         "xml": {
           "name": "classification",
@@ -12363,16 +12110,7 @@
                 "type": "string",
                 "xml": {
                   "attribute": true
-                },
-                "enum": [
-                  "candidate",
-                  "approved",
-                  "redirected",
-                  "not_compliant",
-                  "rejected",
-                  "obsolete",
-                  "deleted"
-                ]
+                }
               },
               "lastModified": {
                 "type": "string",
@@ -12385,7 +12123,94 @@
           }
         ]
       },
-      "geographicName": {
+      "GTAAConcept": {
+        "required": [
+          "objectType"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "format": "uri"
+          },
+          "lastModified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string"
+          },
+          "redirectedFrom": {
+            "type": "string",
+            "format": "uri"
+          },
+          "scopeNotes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "objectType": {
+            "type": "string"
+          }
+        },
+        "discriminator": {
+          "propertyName": "objectType"
+        }
+      },
+      "GTAAGenre": {
+        "type": "object",
+        "xml": {
+          "name": "genre",
+          "namespace": "urn:vpro:gtaa:2017"
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GTAAConcept"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "scopeNotes": {
+                "type": "array",
+                "xml": {
+                  "name": "scopeNote"
+                },
+                "items": {
+                  "type": "string",
+                  "xml": {
+                    "name": "scopeNote"
+                  }
+                }
+              },
+              "id": {
+                "type": "string",
+                "format": "uri",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "status": {
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "lastModified": {
+                "type": "string",
+                "format": "date-time",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "GTAAGeographicName": {
         "type": "object",
         "xml": {
           "name": "geographicName",
@@ -12421,16 +12246,7 @@
                 "type": "string",
                 "xml": {
                   "attribute": true
-                },
-                "enum": [
-                  "candidate",
-                  "approved",
-                  "redirected",
-                  "not_compliant",
-                  "rejected",
-                  "obsolete",
-                  "deleted"
-                ]
+                }
               },
               "lastModified": {
                 "type": "string",
@@ -12443,7 +12259,7 @@
           }
         ]
       },
-      "maker": {
+      "GTAAMaker": {
         "type": "object",
         "xml": {
           "name": "maker",
@@ -12479,16 +12295,7 @@
                 "type": "string",
                 "xml": {
                   "attribute": true
-                },
-                "enum": [
-                  "candidate",
-                  "approved",
-                  "redirected",
-                  "not_compliant",
-                  "rejected",
-                  "obsolete",
-                  "deleted"
-                ]
+                }
               },
               "lastModified": {
                 "type": "string",
@@ -12501,7 +12308,7 @@
           }
         ]
       },
-      "name": {
+      "GTAAName": {
         "type": "object",
         "xml": {
           "name": "name",
@@ -12537,16 +12344,7 @@
                 "type": "string",
                 "xml": {
                   "attribute": true
-                },
-                "enum": [
-                  "candidate",
-                  "approved",
-                  "redirected",
-                  "not_compliant",
-                  "rejected",
-                  "obsolete",
-                  "deleted"
-                ]
+                }
               },
               "lastModified": {
                 "type": "string",
@@ -12559,7 +12357,7 @@
           }
         ]
       },
-      "person": {
+      "GTAAPerson": {
         "type": "object",
         "xml": {
           "name": "person",
@@ -12607,16 +12405,7 @@
                 "type": "string",
                 "xml": {
                   "attribute": true
-                },
-                "enum": [
-                  "candidate",
-                  "approved",
-                  "redirected",
-                  "not_compliant",
-                  "rejected",
-                  "obsolete",
-                  "deleted"
-                ]
+                }
               },
               "lastModified": {
                 "type": "string",
@@ -12629,7 +12418,7 @@
           }
         ]
       },
-      "topic": {
+      "GTAATopic": {
         "type": "object",
         "xml": {
           "name": "topic",
@@ -12665,16 +12454,7 @@
                 "type": "string",
                 "xml": {
                   "attribute": true
-                },
-                "enum": [
-                  "candidate",
-                  "approved",
-                  "redirected",
-                  "not_compliant",
-                  "rejected",
-                  "obsolete",
-                  "deleted"
-                ]
+                }
               },
               "lastModified": {
                 "type": "string",
@@ -12687,7 +12467,7 @@
           }
         ]
       },
-      "topicbandg": {
+      "GTAATopicBandG": {
         "type": "object",
         "xml": {
           "name": "topicbandg",
@@ -12723,16 +12503,7 @@
                 "type": "string",
                 "xml": {
                   "attribute": true
-                },
-                "enum": [
-                  "candidate",
-                  "approved",
-                  "redirected",
-                  "not_compliant",
-                  "rejected",
-                  "obsolete",
-                  "deleted"
-                ]
+                }
               },
               "lastModified": {
                 "type": "string",
@@ -12744,6 +12515,17 @@
             }
           }
         ]
+      },
+      "Names": {
+        "type": "object",
+        "properties": {
+          "givenName": {
+            "type": "string"
+          },
+          "familyName": {
+            "type": "string"
+          }
+        }
       },
       "PersonResult": {
         "type": "object",
@@ -12790,6 +12572,66 @@
               "$ref": "#/components/schemas/person"
             }
           }
+        }
+      },
+      "person": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uri",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "givenName": {
+            "type": "string"
+          },
+          "familyName": {
+            "type": "string"
+          },
+          "scopeNotes": {
+            "type": "array",
+            "xml": {
+              "name": "scopeNote"
+            },
+            "items": {
+              "type": "string",
+              "xml": {
+                "name": "scopeNote"
+              }
+            }
+          },
+          "knownAs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Names"
+            }
+          },
+          "redirectedFrom": {
+            "type": "string",
+            "format": "uri"
+          },
+          "status": {
+            "type": "string",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "lastModified": {
+            "type": "string",
+            "format": "date-time",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "person",
+          "namespace": "urn:vpro:gtaa:2017"
         }
       },
       "thesaurusItems": {

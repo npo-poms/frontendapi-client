@@ -55,11 +55,7 @@
               <goal>generate</goal>
             </goals>
             <configuration>
-              <!--
-                  <inputSpec>https://rs-test.poms.omroep.nl/v1/api/openapi.json</inputSpec>
-
--->
-              <inputSpec>openapi.json</inputSpec>
+              <inputSpec>src/main/resources/openapi.json</inputSpec>
               <generatorName>java</generatorName>
               <apiPackage>nl.vpro.npo-api</apiPackage>
               <modelPackage>nl.vpro.npo-api.model</modelPackage>
@@ -67,7 +63,7 @@
               <configHelp>false</configHelp>
               <generateApiTests>false</generateApiTests>
               <generateModelTests>false</generateModelTests>
-              <generateApiDocumentation>false</generateApiDocumentation>
+              <generateApiDocumentation>true</generateApiDocumentation>
               <configOptions>
                 <strictSpec>true</strictSpec>
                 <dateLibrary>java8</dateLibrary>
