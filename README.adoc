@@ -1,0 +1,16 @@
+= Frontend API client generator
+
+Since version 7.3 the frontend api supplies an  api specification in https://rs-test.poms.omroep.nl/v1/api/openapi.json[openapi format]. This can be used to generate clients.
+
+We use to generate our clients https://github.com/npo-poms/api-clients[directly from the service interfaces]. This is nicer, because we get all details and utilities available in the server implementation itself.
+
+But not everyone uses java. This project is used to check how good our `openapi.json` is. It is _generated_, so it should perfectly align with the actual implementation, but in practice it proofs to need some tweaking (with extra openapi 3 annotations) , for it to consistent, error free, and actually usable to generate client.
+
+This is wat we try here.
+
+== Status
+The latest version of the json is checked in. It is good enough for `openapi-generator-maven-plugin` to generate compiling code.
+
+It is as yet not tested any further.
+
+
