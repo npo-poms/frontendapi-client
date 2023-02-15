@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>nl.vpro.poms</groupId>
+    <artifactId>poms-shared-parent</artifactId>
+    <version>7.3-SNAPSHOT</version>
+  </parent>
+  <groupId>nl.vpro.media</groupId>
+  <artifactId>npo-api.generated-client</artifactId>
+
+
+  
+  <dependencies>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.ws.rs</groupId>
+      <artifactId>jakarta.ws.rs-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-client-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-multipart-provider</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.swagger.parser.v3</groupId>
+      <artifactId>swagger-parser</artifactId>
+      <version>2.1.11</version>
+    </dependency>
+  </dependencies>
+  <build>
+    
+    <plugins>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>3.3.4</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <!--
+                  <inputSpec>https://rs-test.poms.omroep.nl/v1/api/openapi.json</inputSpec>
+
+-->
+              <inputSpec>openapi.json</inputSpec>
+              <generatorName>java</generatorName>
+              <apiPackage>nl.vpro.npo-api</apiPackage>
+              <modelPackage>nl.vpro.npo-api.model</modelPackage>
+              <invokerPackage>nl.vpro.npo-api.invoker</invokerPackage>
+              <configHelp>false</configHelp>
+              <generateApiTests>false</generateApiTests>
+              <generateModelTests>false</generateModelTests>
+              <generateApiDocumentation>false</generateApiDocumentation>
+              <configOptions>
+                <strictSpec>true</strictSpec>
+                <dateLibrary>java8</dateLibrary>
+                <java8>true</java8>
+                <library>resteasy</library>
+                <withXml>false</withXml>
+                <annotationLibrary>none</annotationLibrary>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>io.swagger.parser.v3</groupId>
+            <artifactId>swagger-parser</artifactId>
+            <version>${swagger3-parser.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson2.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+</project>
