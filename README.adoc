@@ -1,5 +1,8 @@
 = Frontend API client generator
 
+image:https://github.com/npo-poms/frontendapi-client/workflows/build/badge.svg?[Build Status,link=https://github.com/npo-poms/frontendapi-client/actions?query=workflow%3Abuild]
+
+
 Since version 7.3 the frontend api supplies an  api specification in https://rs-test.poms.omroep.nl/v1/api/openapi.json[openapi format]. This can be used to generate clients.
 
 We use to generate our clients https://github.com/npo-poms/api-clients[directly from the service interfaces]. This is nicer, because we get all details and utilities available in the server implementation itself.
